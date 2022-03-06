@@ -1,46 +1,41 @@
 <?php
-
-$break = "<br/>"; 
+$break = "<br>";
 class User {
-    public $username;
-    public $email;
-
+    private $userName;
+    private $email;
 
     public function __construct($username, $email) {
-        $this->username = $username;
+        $this->userName = $username;
         $this->email = $email;
+
     }
 
-    public function addFriend() {
-        $user = $this->username;
-        return "$user have new friends";
+    public function introduce() {
+        $userName = $this->userName;
+        $email = $this->email;
+        return "Hi i'm $userName and my email is $email";
     }
+    public function getEmail() {
+        return $this->email;
+    }
+    public function changeEmail($email) {
+        if (strpos($email, "@") > -1) {
+            $this->email = $email;
+        }
+    }
+
 }
-//declaring users from class
-$userOne = new User("gabe", "gabefletcher@gmail.com");
-$userTwo = new user("alrose", "alrose@gmail.com");
 
+$userOne = new User("Gabe", "gabefletchers@gmail.com");
+$userTwo = new User("Alrose", "alrosewasawas@gmail.com");
 
-echo $userOne->username . $break;
-echo $userOne->email . $break;
-echo $userOne->addFriend() . $break;
+echo $userOne->getEmail() . "<br/>";
+echo $userTwo->getEmail() . "<br/>";
 
+echo $userOne->changeEmail("newgabefletchers@gmail.com");
 echo $break;
 
-
-echo $break;
-echo $userTwo->username . $break;
-echo $userTwo->email . $break;
-echo $userTwo->addFriend() . $break;
-
-
-
-
-// //get class variables
-// print_r(get_class_vars('User'));
-// echo $break;
-// //get class methods
-// print_r(get_class_methods('User'));
+echo $userOne->getEmail();
 
 
 
