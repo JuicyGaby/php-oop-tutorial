@@ -1,4 +1,7 @@
 <?php
+
+use FFI\ParserException;
+
 $break = "<br>";
 class User {
     private $userName;
@@ -25,17 +28,28 @@ class User {
     }
 
 }
+//create a new class and inherit the User class
+class adminUser extends User {
+    public $level;
+
+    //creates a constructor function for new argument/s input
+    public function __construct($username, $email, $level) {
+        $this->level = $level;
+        //calls the constructor function from the parent class to put in the first two arguements
+        parent::__construct($username, $email);
+        
+    }
+}
 
 $userOne = new User("Gabe", "gabefletchers@gmail.com");
 $userTwo = new User("Alrose", "alrosewasawas@gmail.com");
+// variable created from the child class (adminUser)
+$userThree = new adminUser("admin", "theadmin@gmail.com", 6);
 
-echo $userOne->getEmail() . "<br/>";
-echo $userTwo->getEmail() . "<br/>";
+//introduce method is from the parent class (user)
+echo $userThree->introduce()
 
-echo $userOne->changeEmail("newgabefletchers@gmail.com");
-echo $break;
 
-echo $userOne->getEmail();
 
 
 
