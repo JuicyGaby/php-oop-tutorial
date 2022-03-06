@@ -1,8 +1,15 @@
 <?php
+
 $break = "<br/>"; 
 class User {
-    public $username = "gabe";
-    public $email = "gabefletchers@gmail.com";
+    public $username;
+    public $email;
+
+
+    public function __construct($username, $email) {
+        $this->username = $username;
+        $this->email = $email;
+    }
 
     public function addFriend() {
         $user = $this->username;
@@ -10,8 +17,8 @@ class User {
     }
 }
 //declaring users from class
-$userOne = new User();
-$userTwo = new user();
+$userOne = new User("gabe", "gabefletcher@gmail.com");
+$userTwo = new user("alrose", "alrose@gmail.com");
 
 
 echo $userOne->username . $break;
@@ -19,9 +26,6 @@ echo $userOne->email . $break;
 echo $userOne->addFriend() . $break;
 
 echo $break;
-//overwriting class values
-$userTwo->username = "alrose";
-$userTwo->email = "alrose@gmail.com";
 
 
 echo $break;
@@ -51,6 +55,6 @@ echo $userTwo->addFriend() . $break;
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>Hello</h1>
 </body>
 </html>
