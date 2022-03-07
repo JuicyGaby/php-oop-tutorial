@@ -6,17 +6,16 @@ $break = "<br>";
 class User {
     private $userName;
     private $email;
+    //variable for role
+    public $role = "member";
 
     public function __construct($username, $email) {
         $this->userName = $username;
         $this->email = $email;
 
     }
-
-    public function introduce() {
-        $userName = $this->userName;
-        $email = $this->email;
-        return "Hi i'm $userName and my email is $email";
+    public function message() {
+        return "$this->email sent a new message";
     }
     public function getEmail() {
         return $this->email;
@@ -31,6 +30,8 @@ class User {
 //create a new class and inherit the User class
 class adminUser extends User {
     public $level;
+    //role variable for adminUser to override the parent role variable
+    public $role = "admin";
 
     //creates a constructor function for new argument/s input
     public function __construct($username, $email, $level) {
@@ -39,15 +40,27 @@ class adminUser extends User {
         parent::__construct($username, $email);
         
     }
+
+    public function message() {
+        //override parent message() function
+        //return "$this->email, an admin, sent a message";
+        return "hello world";
+    }
 }
 
 $userOne = new User("Gabe", "gabefletchers@gmail.com");
 $userTwo = new User("Alrose", "alrosewasawas@gmail.com");
-// variable created from the child class (adminUser)
 $userThree = new adminUser("admin", "theadmin@gmail.com", 6);
 
-//introduce method is from the parent class (user)
-echo $userThree->introduce()
+echo $userOne->role . "<br/>";
+//echoing user 3 (admin) role
+echo $userThree->role . "<br/>";
+echo $userOne->message() . "<br/>";
+//calling same function (adminUser);
+echo $userThree->message();
+
+
+
 
 
 
@@ -64,6 +77,6 @@ echo $userThree->introduce()
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello</h1>
+    <h1>Overriding Properties & Methods</h1>
 </body>
 </html>
