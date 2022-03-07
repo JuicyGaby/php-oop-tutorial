@@ -1,11 +1,16 @@
 <?php
 
 use FFI\ParserException;
+// access modifiers
 
+//public, can be accessed and change anywhere
+//private, can be accessed internally and insdie the class ONLY where it was declared
+//protected, same as private however, protected can be accessed also in subclass or child class
 $break = "<br>";
 class User {
     private $userName;
-    private $email;
+    //changed to protected type for adminUser child class to access
+    protected $email;
     //variable for role
     public $role = "member";
 
@@ -43,8 +48,7 @@ class adminUser extends User {
 
     public function message() {
         //override parent message() function
-        //return "$this->email, an admin, sent a message";
-        return "hello world";
+        return "$this->email, an admin, sent a message";
     }
 }
 
