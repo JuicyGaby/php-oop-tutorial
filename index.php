@@ -1,23 +1,24 @@
 <?php
 
 use FFI\ParserException;
-// access modifiers
-
-//public, can be accessed and change anywhere
-//private, can be accessed internally and insdie the class ONLY where it was declared
-//protected, same as private however, protected can be accessed also in subclass or child class
 $break = "<br>";
 class User {
-    private $userName;
-    //changed to protected type for adminUser child class to access
+    public $userName;
     protected $email;
-    //variable for role
     public $role = "member";
 
     public function __construct($username, $email) {
         $this->userName = $username;
         $this->email = $email;
 
+    }
+    //this function is like the opposite of the construct method
+    public function __destruct() {
+        echo "$this->email is removed <br/>";
+    }
+    //this magic function will perform when there is new instance is created using clone
+    public function __clone() {
+        $this->userName = $this->userName . "(cloned) <br/>";
     }
     public function message() {
         return "$this->email sent a new message";
@@ -32,22 +33,17 @@ class User {
     }
 
 }
-//create a new class and inherit the User class
 class adminUser extends User {
     public $level;
-    //role variable for adminUser to override the parent role variable
     public $role = "admin";
 
-    //creates a constructor function for new argument/s input
     public function __construct($username, $email, $level) {
         $this->level = $level;
-        //calls the constructor function from the parent class to put in the first two arguements
         parent::__construct($username, $email);
         
     }
 
     public function message() {
-        //override parent message() function
         return "$this->email, an admin, sent a message";
     }
 }
@@ -56,12 +52,9 @@ $userOne = new User("Gabe", "gabefletchers@gmail.com");
 $userTwo = new User("Alrose", "alrosewasawas@gmail.com");
 $userThree = new adminUser("admin", "theadmin@gmail.com", 6);
 
-echo $userOne->role . "<br/>";
-//echoing user 3 (admin) role
-echo $userThree->role . "<br/>";
-echo $userOne->message() . "<br/>";
-//calling same function (adminUser);
-echo $userThree->message();
+$userFour = clone $userOne;
+
+echo $userFour->userName . "<br/>";
 
 
 
@@ -81,6 +74,6 @@ echo $userThree->message();
     <title>Document</title>
 </head>
 <body>
-    <h1>Overriding Properties & Methods</h1>
+<h1>Clone and Destruct methods</h1>
 </body>
 </html>
