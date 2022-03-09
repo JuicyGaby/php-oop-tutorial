@@ -12,6 +12,7 @@ class UserValidator {
     $this->data = $postData;
         
     }
+    //validates the form
     public function validateForm () {
         foreach(self::$fields as $field) {
             if (!array_key_exists($field, $this->data)) {
@@ -24,6 +25,7 @@ class UserValidator {
         $this->validateEmail();
         return $this->error;
     }
+    //validates the Username
     private function validateUsername() {
         //trim method clears the white space
         $value = trim($this->data['username']);
@@ -36,6 +38,7 @@ class UserValidator {
             }
         }
     }
+    //validates the email
     private function validateEmail() {
         $value = trim($this->data['email']);
 
